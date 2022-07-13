@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { defineComponent, ref, useAsync, useContext, useRouter } from '@nuxtjs/composition-api'
+import { defineComponent, ref, useAsync, useContext, useRouter, useStore } from '@nuxtjs/composition-api'
 import { fetchProductById } from '@/api/index'
 
 export default defineComponent({
@@ -36,7 +36,10 @@ export default defineComponent({
     })
 
     const router = useRouter()
+    const store = useStore()
     const addToCart = () => {
+      console.log(store.state);
+      store.commit('addCartItem',product.value)
       router.push('/cart')
     }
 
