@@ -38,7 +38,6 @@ export default defineComponent({
     const router = useRouter()
     const store = useStore()
     const addToCart = () => {
-      console.log(store.state);
       store.commit('addCartItem',product.value)
       router.push('/cart')
     }

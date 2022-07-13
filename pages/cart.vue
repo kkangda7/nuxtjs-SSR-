@@ -1,11 +1,17 @@
 <template>
   <div>
-    <ul>
-      <li>상품 1</li>
-      <li>상품 2</li>
-      <li>상품 3</li>
-    </ul>
-  </div> 
+    <h1>카트 페이지</h1>
+    <div>
+      <ul>
+        <li v-for="cartItem in $store.state.cartItems" 
+          :key="cartItem.id"
+        >
+          <img :src="cartItem.imageUrl" :alt="cartItem.name ">
+          <p>{{ cartItem.name }}</p>
+        </li>
+      </ul>
+    </div>
+  </div>
 </template>
 
 <script>
