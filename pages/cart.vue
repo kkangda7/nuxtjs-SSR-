@@ -5,7 +5,7 @@
       <li>상품 2</li>
       <li>상품 3</li>
     </ul>
-  </div>
+  </div> 
 </template>
 
 <script>
