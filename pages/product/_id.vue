@@ -11,32 +11,40 @@
       <div class="side-panel">
         <p class="name">{{ product.name }}</p>
         <p class="price">{{ product.price }}</p>
-        <button type="button">Add to Cart</button>
+        <button 
+          type="button"
+          @click="addToCart"
+        >Add to Cart</button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { defineComponent, ref, useAsync, useContext } from '@nuxtjs/composition-api'
+import { defineComponent, ref, useAsync, useContext, useRouter, useStore } from '@nuxtjs/composition-api'
 import { fetchProductById } from '@/api/index'
 
 export default defineComponent({
   setup() {
-    // const route = useRoute()
-    // const id = route.value.params.id
     const product = ref({})
     const { route } = useContext()
     const id = route.value.params.id
     
-
     useAsync( async() => {
       const { data } = await fetchProductById(id)
       product.value = data
     })
 
+    const router = useRouter()
+    const store = useStore()
+    const addToCart = () => {
+      store.commit('addCartItem',product.value)
+      router.push('/cart')
+    }
+
     return {
-      product
+      product,
+      addToCart
     }
   },
 })

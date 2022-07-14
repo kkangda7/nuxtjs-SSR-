@@ -21,7 +21,7 @@
         </li>
       </ul>
       <div class="cart-wrapper">
-        <button class="btn">
+        <button class="btn" @click="moveToCartPage()">
           장바구니 바로가기
         </button>
       </div>
@@ -73,11 +73,16 @@ export default defineComponent({
       })
     }
 
+    const moveToCartPage = () => {
+      router.push('/cart')
+    }
+
     return {
       products,
       moveToDetailPage,
       searchKeyword,
-      searchProduct
+      searchProduct,
+      moveToCartPage
     };
   },
 })
