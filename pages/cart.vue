@@ -4,7 +4,7 @@
     <div class="list-wrapper">
       <ul>
         <li 
-          v-for="cartItem in cartItems" 
+          v-for="cartItem in $store.state.cartItems" 
           :key="cartItem.id" 
           class="list-item"
         >
@@ -28,29 +28,18 @@
 
 <script>
 
-import { defineComponent, useFetch, ref, useStore } from '@nuxtjs/composition-api'
+import { defineComponent, useAsync, useContext } from '@nuxtjs/composition-api'
 import { FETCH_CART_ITEMS } from '@/store/index'
 
 export default defineComponent({
   setup() {
-    const cartItems = ref({})
-    const store = useStore()
+    const {store} = useContext()
    
 
-    useFetch(async () => {
-      try {
-        const res = await store.dispatch(FETCH_CART_ITEMS);
-        cartItems.value = res.data
-      } catch (err) {
-        // eslint-disable-next-line no-console
-        console.error(err)
-      }
-
+    useAsync(async () => {
+      await store.dispatch(FETCH_CART_ITEMS);
     })
 
-    return {
-      cartItems
-    }
   }
 })
 </script>

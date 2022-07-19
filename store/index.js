@@ -26,7 +26,9 @@ export const mutations = {
 export const actions = {
   async [FETCH_CART_ITEMS]({commit}) {
     const res = await fetchCartItem()
-    commit('setCartItems', res.data)
-    return res
+    commit('setCartItems', res.data.map((item) => ({
+      ...item,
+      imageUrl: `${item.imageUrl}?random=${Math.random()}`
+    })))
   }
 }

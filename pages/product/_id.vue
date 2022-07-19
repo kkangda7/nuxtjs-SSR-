@@ -39,8 +39,8 @@ export default defineComponent({
     const store = useStore()
     const addToCart = async () => {
       try {
-        await createCartItem(product.value)
         store.commit('addCartItem', product.value)
+        await createCartItem(product.value)
         router.push('/cart')
       } catch (err) {
       // eslint-disable-next-line no-console
