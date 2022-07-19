@@ -241,6 +241,12 @@
       "name": "Intelligent Concrete Salad",
       "price": "501.00",
       "imageUrl": "http://placeimg.com/640/480/fashion"
+    },
+    {
+      "id": 28,
+      "name": "Refined Fresh Chicken",
+      "price": "209.00",
+      "imageUrl": "http://placeimg.com/640/480/fashion"
     }
   ]
 }

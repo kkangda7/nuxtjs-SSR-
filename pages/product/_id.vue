@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { defineComponent, ref, useAsync, useContext, useRouter, useStore } from '@nuxtjs/composition-api'
+import { defineComponent, ref, useContext, useFetch, useRouter, useStore } from '@nuxtjs/composition-api'
 import { fetchProductById, createCartItem } from '@/api/index'
 
 export default defineComponent({
@@ -30,7 +30,7 @@ export default defineComponent({
     const { route } = useContext()
     const id = route.value.params.id
     
-    useAsync( async() => {
+    useFetch( async() => {
       const { data } = await fetchProductById(id)
       product.value = data
     })
