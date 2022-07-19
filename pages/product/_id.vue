@@ -14,15 +14,15 @@
         <button 
           type="button"
           @click="addToCart"
-        >Add to Cart</button>
+        >카트에 담기</button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { defineComponent, ref, useAsync, useContext, useRouter, useStore } from '@nuxtjs/composition-api'
-import { fetchProductById } from '@/api/index'
+import { defineComponent, ref, useContext, useFetch, useRouter, useStore } from '@nuxtjs/composition-api'
+import { fetchProductById, createCartItem } from '@/api/index'
 
 export default defineComponent({
   setup() {
@@ -30,16 +30,23 @@ export default defineComponent({
     const { route } = useContext()
     const id = route.value.params.id
     
-    useAsync( async() => {
+    useFetch( async() => {
       const { data } = await fetchProductById(id)
       product.value = data
     })
 
     const router = useRouter()
     const store = useStore()
-    const addToCart = () => {
-      store.commit('addCartItem',product.value)
-      router.push('/cart')
+    const addToCart = async () => {
+      try {
+        store.commit('addCartItem', product.value)
+        await createCartItem(product.value)
+        router.push('/cart')
+      } catch (err) {
+      // eslint-disable-next-line no-console
+      console.error(err)
+    }
+
     }
 
     return {
