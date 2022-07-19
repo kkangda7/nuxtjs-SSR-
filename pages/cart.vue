@@ -28,17 +28,17 @@
 
 <script>
 
-import { defineComponent, useAsync, useContext } from '@nuxtjs/composition-api'
-import { FETCH_CART_ITEMS } from '@/store/index'
+import { defineComponent } from '@nuxtjs/composition-api'
+// import { FETCH_CART_ITEMS } from '@/store/index'
 
 export default defineComponent({
   setup() {
-    const {store} = useContext()
-   
+    // const { store } = useContext()
 
-    useAsync(async () => {
-      await store.dispatch(FETCH_CART_ITEMS);
-    })
+    // nuxtServerInit를 쓰고있기 때문에 useAsync를 사용하지 않아도 됨.
+    // useAsync(async () => {
+    //   await store.dispatch(FETCH_CART_ITEMS);
+    // })
 
   }
 })
